@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Secure Audio Messenger</title>
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Secure Audio Messenger</h1>
+
+      <!-- VÙNG ĐĂNG KÝ / USER -->
+      <div class="card">
+        <h2>Thông tin User</h2>
+        <div class="input-group">
+          <input
+            type="text"
+            id="username-input"
+            placeholder="Nhập username của bạn"
+          />
+          <button id="register-btn">Tạo khóa & Đăng ký</button>
+        </div>
+        <p>
+          <strong>Trạng thái:</strong>
+          <span id="status-label">Chưa đăng ký</span>
+        </p>
+        <div class="key-display">
+          <p><strong>Public Key:</strong></p>
+          <textarea id="public-key-display" rows="3" readonly></textarea>
+        </div>
+      </div>
+
+      <!-- VÙNG GỬI TIN NHẮN -->
+      <div class="card">
+        <h2>Gửi tin nhắn</h2>
+        <div class="input-group">
+          <label for="recipient-select">Gửi đến:</label>
+          <select id="recipient-select">
+            <option value="">-- Chọn người nhận --</option>
+          </select>
+          <button id="refresh-users-btn">Làm mới</button>
+        </div>
+        <div class="input-group">
+          <button id="record-btn">Bắt đầu ghi âm</button>
+          <button id="send-btn" disabled>Gửi tin nhắn</button>
+        </div>
+        <p>
+          <strong>Trạng thái ghi âm:</strong>
+          <span id="record-status">Sẵn sàng</span>
+        </p>
+      </div>
+
+      <!-- VÙNG NHẬN TIN NHẮN -->
+      <div class="card">
+        <h2>Hộp thư đến</h2>
+        <div class="input-group">
+          <label for="private-key-input"
+            >Private Key (để giải mã tin nhắn):</label
+          >
+          <textarea
+            id="private-key-input"
+            rows="4"
+            placeholder="Nhập private key của bạn để giải mã tin nhắn..."
+          ></textarea>
+        </div>
+        <div class="input-group">
+          <button id="check-mail-btn">Kiểm tra tin nhắn</button>
+          <button id="clear-private-key-btn">Xóa Private Key</button>
+        </div>
+        <div class="info-box">
+          <p><strong>Hướng dẫn sử dụng:</strong></p>
+          <ul>
+            <li>Sau khi đăng ký, copy private keys từ ô "Thông tin User"</li>
+            <li>Dán vào ô "Private Key" để có thể giải mã tin nhắn</li>
+            <li>Private key chỉ được lưu tạm thời trong trình duyệt</li>
+            <li>Nhấn "Xóa Private Key" để xóa khỏi bộ nhớ</li>
+          </ul>
+        </div>
+        <div id="inbox">
+          <p>Chưa có tin nhắn nào.</p>
+        </div>
+      </div>
+    </div>
+
+    <script src="/static/main.js"></script>
+    <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+    <div id="toast"></div>
+  </body>
+</html>
